@@ -61,3 +61,35 @@ function reverseArrayInPlace(myArray) {
 var sample = range(1, 5);
 reverseArrayInPlace(sample);
 console.log(sample);
+
+// Implementing Lists
+
+function prepend(value, myList) {
+    newList = {value: value, rest: myList};
+    return newList 
+}
+
+function nth(index, myList) {
+    if (index == 0) return myList.value;
+    else {
+        if (myList.rest == null) return undefined;
+        return nth(index - 1, myList.rest)
+    }
+}
+
+function arrayToList(myArray) {
+    myList = null;
+    for (var i = myArray.length; i >= 1; i--) {
+        myList = prepend(myArray[i - 1], myList);
+    }
+    return myList
+}
+
+console.log(arrayToList([1,2,3]));
+function listToArray(myList) {
+    myArray = [];
+    for (var node = myList; node; node = node.rest) {
+        myArray.push(node.value)
+    }
+    return myArray
+}
