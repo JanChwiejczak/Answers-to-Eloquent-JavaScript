@@ -65,8 +65,7 @@ console.log(sample);
 // Implementing Lists
 
 function prepend(value, myList) {
-    newList = {value: value, rest: myList};
-    return newList 
+    return {value: value, rest: myList};
 }
 
 function nth(index, myList) {
@@ -78,18 +77,41 @@ function nth(index, myList) {
 }
 
 function arrayToList(myArray) {
-    myList = null;
+    var myList = null;
     for (var i = myArray.length; i >= 1; i--) {
         myList = prepend(myArray[i - 1], myList);
     }
     return myList
 }
 
-console.log(arrayToList([1,2,3]));
 function listToArray(myList) {
-    myArray = [];
+    var myArray = [];
     for (var node = myList; node; node = node.rest) {
         myArray.push(node.value)
     }
     return myArray
 }
+
+function deepEqual(a, b) {
+    if (a === b) return true;
+
+    if (a == null || typeof a != "object" ||
+        b == null || typeof b != "object") {
+        return false
+    }
+
+    var count_a = 0, count_b = 0;
+    for (var prop in a) count_a++;
+    for (var prop in b) {
+        count_b++;
+        if (!(prop in a) || !deepEqual(a[prop], b[prop]))
+            return false;
+    }
+
+    return count_a == count_b;
+}
+
+var obj = {here: {is: "an"}, object: 2};
+console.log(deepEqual(obj, obj));
+console.log(deepEqual(obj, {here: 1, object: 2}));
+console.log(deepEqual(obj, {here: {is: "an"}, object: 2}));
