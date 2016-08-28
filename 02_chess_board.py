@@ -23,5 +23,5 @@ for i in range(1, (size ** 2) + 1):
     if i % size != 0:
         print(next(piece), end='')
     else:
-        print(next(piece)) # Last piece in a row printed with newline
+        print(next(piece))  # Last piece in a row printed with newline
         next(piece)  # Switch first piece in next row
